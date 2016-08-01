@@ -15,7 +15,7 @@ public class ConnectionFactory {
 				String testDataBaseUser = System.getProperty("testDataBaseUser");
 				String dataBasePassword = System.getProperty("dataBasePassword", "");
 				String testDataBasePassword = System.getProperty("testDataBasePassword", "");
-				String accessPoint = System.getProperty("productionAccessPoint");
+				String accessPoint = System.getProperty("accessPoint");
 				String testAccessPoint = System.getProperty("testAccessPoint");
 
 				if (!"test".equals(mode) && !"production".equals(mode)) throw new RuntimeException("Invalid mode: " + mode);
