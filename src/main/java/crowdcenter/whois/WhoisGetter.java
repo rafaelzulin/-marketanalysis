@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import crowdcenter.db.ConnectionFactory;
+import crowdcenter.aa.db.ConnectionFactory;
 
 public class WhoisGetter {
 	

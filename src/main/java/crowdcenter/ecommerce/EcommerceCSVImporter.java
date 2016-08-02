@@ -16,7 +16,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import crowdcenter.db.ConnectionFactory;
+import crowdcenter.aa.db.ConnectionFactory;
 
 public class EcommerceCSVImporter {
 	

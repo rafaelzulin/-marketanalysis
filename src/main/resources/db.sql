@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: appdata-mysql.clygu27w06nt.us-west-2.rds.amazonaws.com:3306
--- Generation Time: Jul 28, 2016 at 10:14 PM
+-- Generation Time: Aug 01, 2016 at 03:10 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -84,6 +84,30 @@ CREATE TABLE `ecommerce` (
   `cidade` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `cep` char(8) COLLATE utf8_bin DEFAULT NULL,
   `total_vendido` decimal(20,2) DEFAULT '0.00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `linkedin`
+--
+
+CREATE TABLE `linkedin` (
+  `company_name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `domain` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `industry` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `employees` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `locality` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `region` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `country` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `social_network_type` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `social_network_link` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `website` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `description` varchar(2001) COLLATE utf8_bin DEFAULT NULL,
+  `street` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `postal_code` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `year_established` varchar(10) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -189,6 +213,26 @@ CREATE TABLE `whois` (
   `billing_contact_fax_number` varchar(50) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+CREATE TABLE `ebit` (
+  `nome` varchar(100) COLLATE utf8_bin NOT NULL,
+  `mercado` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `medalha` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `avaliacoes` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `site` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `status_site` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ebit`
+--
+ALTER TABLE `ebit`
+  ADD PRIMARY KEY (`nome`);
+
 --
 -- Indexes for dumped tables
 --
@@ -204,6 +248,12 @@ ALTER TABLE `alexa_brasil`
 --
 ALTER TABLE `ecommerce`
   ADD PRIMARY KEY (`cnpj`);
+
+--
+-- Indexes for table `linkedin`
+--
+ALTER TABLE `linkedin`
+  ADD PRIMARY KEY (`company_name`);
 
 --
 -- Indexes for table `whois`

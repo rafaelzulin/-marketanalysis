@@ -1,4 +1,4 @@
-package crowdcenter.linkedin;
+package crowdcenter.aa.output;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,22 +8,22 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import crowdcenter.db.ConnectionFactory;
+import crowdcenter.aa.db.ConnectionFactory;
+import crowdcenter.aa.parser.LinkedInCSVParser;
 
-public class DataBaseOutput {
+public class LinkedInDataBaseOutput implements Output {
 	private Logger logger = LogManager.getFormatterLogger(LinkedInCSVParser.class);
 	private Connection conn;
 	private String[] values;
 	private PreparedStatement statement;
 	
-	private int count = 0;
-	
-	public DataBaseOutput() throws Exception {
+	public LinkedInDataBaseOutput() throws Exception {
 		this.conn = ConnectionFactory.getConnection();
 		this.values = new String[numberFields()];
 		this.statement = conn.prepareStatement(sql());
 	}
 	
+	@Override
 	public Integer numberFields() {
 		return 16;
 	}
@@ -48,10 +48,12 @@ public class DataBaseOutput {
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	}
 	
+	@Override
 	public void setField(Integer index, String value) {
 		values[index] = value;
 	}
 	
+	@Override
 	public void flush() throws Exception {
 		logger.info("OUTPUTING: " + values[1]);
 		
@@ -63,7 +65,7 @@ public class DataBaseOutput {
 			statement.execute();
 			logger.info("Record was successfully outputed");
 		} catch (SQLIntegrityConstraintViolationException e) {
-			logger.error(++count + " Failed to insert. Constraint violation: " + e.getMessage());
+			logger.error(" Failed to insert. Constraint violation: " + e.getMessage());
 		} catch (SQLException e) {
 			throw new SQLException("Some error has ocurred when tried to insert in the BD: " + e.getMessage(), e);
 		} 

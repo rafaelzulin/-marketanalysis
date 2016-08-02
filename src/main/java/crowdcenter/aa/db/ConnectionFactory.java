@@ -1,4 +1,4 @@
-package crowdcenter.db;
+package crowdcenter.aa.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

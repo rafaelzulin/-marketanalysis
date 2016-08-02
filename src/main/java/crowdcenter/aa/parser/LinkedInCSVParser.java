@@ -1,4 +1,4 @@
-package crowdcenter.linkedin;
+package crowdcenter.aa.parser;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -7,23 +7,32 @@ import java.util.Iterator;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class LinkedInCSVParser {
+import crowdcenter.aa.output.Output;
+
+public class LinkedInCSVParser implements Parser {
 	
-	private Logger logger = LogManager.getFormatterLogger(LinkedInCSVParser.class);
 	private Reader reader;
-	private DataBaseOutput out;
+	private Output output;
 	private CSVParser parser;
 	
-	public LinkedInCSVParser(Reader reader, DataBaseOutput out) {
-		this.out = out;
+	public LinkedInCSVParser() {
+		
+	}
+	
+	@Override
+	public void setReader(Reader reader) {
 		this.reader = reader;
 	}
 	
+	@Override
+	public void setOutput(Output output) {
+		this.output = output;
+	}
+	
+	@Override
 	public void initialize() throws IOException {
-		if (out == null) throw new NullPointerException("Reader and outputter must be defined");
+		if (output == null) throw new NullPointerException("Reader and outputter must be defined");
 		
 		try {
 			parser = new CSVParser(reader, buildFormat());
@@ -32,6 +41,7 @@ public class LinkedInCSVParser {
 		}
 	}
 	
+	@Override
 	public void execute() throws Exception {
 		if (parser == null) throw new IOException("The parser has not been initialized");
 		
@@ -42,12 +52,12 @@ public class LinkedInCSVParser {
 			
 			if (! record.isConsistent()) continue;
 			
-			for (int i = 0; i < out.numberFields(); i++) {
+			for (int i = 0; i < output.numberFields(); i++) {
 				String field = record.get(i).trim();
-				out.setField(i, field);
+				output.setField(i, field);
 			}
 			
-			out.flush();
+			output.flush();
 		}
 		parser.close();
 	}
