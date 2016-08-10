@@ -1,4 +1,4 @@
-package crowdcenter.appbase;
+package crowdcenter.extractor;
 
 import java.nio.charset.Charset;
 import java.sql.Connection;
