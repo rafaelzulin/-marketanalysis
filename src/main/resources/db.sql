@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: appdata-mysql.clygu27w06nt.us-west-2.rds.amazonaws.com:3306
--- Generation Time: Aug 01, 2016 at 03:10 PM
+-- Generation Time: Aug 04, 2016 at 08:44 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `appdata`
 --
-CREATE DATABASE IF NOT EXISTS `appdata` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `appdata`;
 
 -- --------------------------------------------------------
 
@@ -33,8 +31,6 @@ CREATE TABLE `alexa_brasil` (
   `language` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `global_rank` int(20) DEFAULT NULL,
   `medium_time` int(20) DEFAULT NULL,
-  `sufix` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `rank` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `category` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `sub_category` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `whoxy_whois` text COLLATE utf8_bin,
@@ -48,8 +44,7 @@ CREATE TABLE `alexa_brasil` (
 --
 
 CREATE TABLE `app_store` (
-  `position` int(20) DEFAULT NULL,
-  `url` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `url` varchar(250) CHARACTER SET utf8 NOT NULL,
   `name` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `developername` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `developerurl` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
@@ -66,6 +61,22 @@ CREATE TABLE `app_store` (
   `developerwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
   `supportwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
   `description` text COLLATE utf8_bin
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ebit`
+--
+
+CREATE TABLE `ebit` (
+  `nome` varchar(100) COLLATE utf8_bin NOT NULL,
+  `mercado` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `medalha` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `avaliacoes` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `site` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `status_site` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `import_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -100,7 +111,6 @@ CREATE TABLE `linkedin` (
   `locality` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `region` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `country` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `social_network_type` varchar(10) COLLATE utf8_bin DEFAULT NULL,
   `social_network_link` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `phone` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `website` varchar(200) COLLATE utf8_bin DEFAULT NULL,
@@ -117,10 +127,9 @@ CREATE TABLE `linkedin` (
 --
 
 CREATE TABLE `play_store` (
-  `position` int(20) NOT NULL,
+  `appid` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
   `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `url` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `appid` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `referencedate` date DEFAULT NULL,
   `developer` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `istopdeveloper` varchar(10) COLLATE utf8_bin DEFAULT NULL,
@@ -213,26 +222,6 @@ CREATE TABLE `whois` (
   `billing_contact_fax_number` varchar(50) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-CREATE TABLE `ebit` (
-  `nome` varchar(100) COLLATE utf8_bin NOT NULL,
-  `mercado` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `medalha` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `avaliacoes` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `site` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `status_site` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `ebit`
---
-ALTER TABLE `ebit`
-  ADD PRIMARY KEY (`nome`);
-
 --
 -- Indexes for dumped tables
 --
@@ -242,6 +231,19 @@ ALTER TABLE `ebit`
 --
 ALTER TABLE `alexa_brasil`
   ADD PRIMARY KEY (`domain`);
+
+--
+-- Indexes for table `app_store`
+--
+ALTER TABLE `app_store`
+  ADD PRIMARY KEY (`url`),
+  ADD KEY `idx_developername` (`developername`) USING BTREE;
+
+--
+-- Indexes for table `ebit`
+--
+ALTER TABLE `ebit`
+  ADD PRIMARY KEY (`nome`);
 
 --
 -- Indexes for table `ecommerce`
@@ -254,6 +256,12 @@ ALTER TABLE `ecommerce`
 --
 ALTER TABLE `linkedin`
   ADD PRIMARY KEY (`company_name`);
+
+--
+-- Indexes for table `play_store`
+--
+ALTER TABLE `play_store`
+  ADD KEY `idx_instalations` (`instalations`) USING BTREE;
 
 --
 -- Indexes for table `whois`

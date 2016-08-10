@@ -1,4 +1,4 @@
-package crowdcenter.aa.parser;
+package crowdcenter.csv.parser;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -8,15 +8,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import crowdcenter.aa.output.Output;
+import crowdcenter.csv.output.Output;
 
-public class LinkedInCSVParser implements Parser {
+public class EbitCSVParser implements Parser {
 	
 	private Reader reader;
 	private Output output;
 	private CSVParser parser;
 	
-	public LinkedInCSVParser() {
+	public EbitCSVParser() {
 		
 	}
 	
@@ -46,13 +46,14 @@ public class LinkedInCSVParser implements Parser {
 		if (parser == null) throw new IOException("The parser has not been initialized");
 		
 		Iterator<CSVRecord> iterator = parser.iterator();
+		Integer numberFields = parser.getHeaderMap().size();
 		
 		while (iterator.hasNext()) {
 			CSVRecord record = iterator.next();
 			
 			if (! record.isConsistent()) continue;
 			
-			for (int i = 0; i < output.numberFields(); i++) {
+			for (int i = 0; i < numberFields; i++) {
 				String field = record.get(i).trim();
 				output.setField(i, field);
 			}
@@ -67,7 +68,6 @@ public class LinkedInCSVParser implements Parser {
 				.withHeader()
 				.withIgnoreEmptyLines()
 				.withIgnoreHeaderCase()
-				.withRecordSeparator('\n')
-				.withQuote('\"');
+				.withRecordSeparator('\n');
 	}
 }

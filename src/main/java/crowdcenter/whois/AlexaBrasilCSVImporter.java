@@ -13,7 +13,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import crowdcenter.aa.db.ConnectionFactory;
+import crowdcenter.db.ConnectionFactory;
 
 public class AlexaBrasilCSVImporter {
 	

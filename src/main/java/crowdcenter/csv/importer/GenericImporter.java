@@ -1,9 +1,10 @@
-package crowdcenter.aa.importer;
+package crowdcenter.csv.importer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -15,10 +16,10 @@ import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import crowdcenter.aa.output.Output;
-import crowdcenter.aa.output.OutputFactory;
-import crowdcenter.aa.parser.Parser;
-import crowdcenter.aa.parser.ParserFactory;
+import crowdcenter.csv.output.Output;
+import crowdcenter.csv.output.OutputFactory;
+import crowdcenter.csv.parser.Parser;
+import crowdcenter.csv.parser.ParserFactory;
 
 public class GenericImporter {
 	
@@ -29,6 +30,9 @@ public class GenericImporter {
 		File[] arrFiles = getFileArray(inputFile);
 		FileReader[] arrReaders = getReaders(arrFiles);
 		Output out = OutputFactory.getOutput();
+		
+		logger.info("Default Charset: " + Charset.defaultCharset());
+		logger.info("File encoding: " + System.getProperty("file.encoding"));
 		
 		for (int i = 0; i < arrReaders.length; i++) {
 			logger.trace("Processing File: " + arrFiles[i]);

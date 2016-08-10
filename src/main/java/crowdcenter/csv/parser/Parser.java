@@ -1,9 +1,9 @@
-package crowdcenter.aa.parser;
+package crowdcenter.csv.parser;
 
 import java.io.IOException;
 import java.io.Reader;
 
-import crowdcenter.aa.output.Output;
+import crowdcenter.csv.output.Output;
 
 public interface Parser {
 	void setReader(Reader reader);

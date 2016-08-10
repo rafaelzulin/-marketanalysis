@@ -1,8 +1,8 @@
-package crowdcenter.aa.output;
+package crowdcenter.csv.output;
 
 public interface Output {
 
-	Integer numberFields();
+
 	void setField(Integer index, String value);
 	void flush() throws Exception;
 }

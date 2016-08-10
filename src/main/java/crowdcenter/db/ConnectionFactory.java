@@ -1,4 +1,4 @@
-package crowdcenter.aa.db;
+package crowdcenter.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +25,7 @@ public class ConnectionFactory {
 				String pw = "production".equals(mode) ? dataBasePassword : testDataBasePassword;
 				
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://" + url + "/appdata?useSSL=false", user, pw);
+				conn = DriverManager.getConnection("jdbc:mysql://" + url + "/appdata?useSSL=false&useUnicode=true&characterEncoding=utf8", user, pw);
 			} catch (Exception e) {
 				throw new Exception("Connection error. Verify VM params", e);
 			}

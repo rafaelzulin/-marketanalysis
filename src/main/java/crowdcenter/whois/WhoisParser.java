@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import crowdcenter.aa.db.ConnectionFactory;
+import crowdcenter.db.ConnectionFactory;
 
 public class WhoisParser {
 	

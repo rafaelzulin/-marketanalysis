@@ -1,4 +1,4 @@
-package crowdcenter.aa.output;
+package crowdcenter.csv.output;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.Date;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import crowdcenter.aa.db.ConnectionFactory;
+import crowdcenter.db.ConnectionFactory;
 
 public class EbitDataBaseOutput implements Output {
 	private Logger logger = LogManager.getFormatterLogger(EbitDataBaseOutput.class);
@@ -24,7 +24,6 @@ public class EbitDataBaseOutput implements Output {
 		this.statement = conn.prepareStatement(sql());
 	}
 	
-	@Override
 	public Integer numberFields() {
 		return 6;
 	}

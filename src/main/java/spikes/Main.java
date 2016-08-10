@@ -1,37 +1,34 @@
 package spikes;
 
-import java.io.File;
+import java.nio.charset.Charset;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters.CharsetConverter;
+
+import crowdcenter.db.ConnectionFactory;
 
 public class Main {
-
-	public static void main(String[] args) throws ParseException {
-		Options options = new Options();
-		Option optFile = new Option("f", "file", true, "Input file");
-		optFile.setRequired(true);
-		optFile.setType(File.class);
-		options.addOption(optFile);
+	public static void main(String[] args) throws SQLException, Exception {
+//		ResultSet rs = ConnectionFactory.getConnection()
+//				.createStatement()
+//				.executeQuery("select * from appdata.app_store");
+//		
+//		while(rs.next()) {
+//			for (int i = 1; i <= 16; i++) {
+//				System.out.print("<" + rs.getString(i) + ">");
+//			}
+//			System.out.print("\n");
+//		}
 		
-		CommandLineParser cliParser = new DefaultParser();
-		HelpFormatter formatter = new HelpFormatter();
-		CommandLine cmd = null;
+//		for(int i = 1; i <= 15; i++) {
+//			System.out.println(new String(rs.getString(i).getBytes(), "UTF-16"));
+//		}
+//		System.out.println("🆎");
 		
-		try {
-			cmd = cliParser.parse(options, args);
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-			formatter.printHelp("help", options);
-		}
 		
-		File file = (File) cmd.getParsedOptionValue("f");
-		System.out.println(file);
-	}
-
+//		System.out.println(Charset.defaultCharset());
+//		System.out.println(System.getProperty("file.encoding"));
+		
+	}		
 }

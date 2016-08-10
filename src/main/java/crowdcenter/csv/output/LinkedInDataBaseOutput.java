@@ -1,4 +1,4 @@
-package crowdcenter.aa.output;
+package crowdcenter.csv.output;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import crowdcenter.aa.db.ConnectionFactory;
-import crowdcenter.aa.parser.LinkedInCSVParser;
+import crowdcenter.csv.parser.LinkedInCSVParser;
+import crowdcenter.db.ConnectionFactory;
 
 public class LinkedInDataBaseOutput implements Output {
 	private Logger logger = LogManager.getFormatterLogger(LinkedInCSVParser.class);
@@ -23,7 +23,6 @@ public class LinkedInDataBaseOutput implements Output {
 		this.statement = conn.prepareStatement(sql());
 	}
 	
-	@Override
 	public Integer numberFields() {
 		return 16;
 	}
