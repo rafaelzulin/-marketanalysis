@@ -10,13 +10,13 @@ import org.apache.commons.csv.CSVRecord;
 
 import crowdcenter.csv.output.Output;
 
-public class LinkedInCSVParser implements Parser {
+public class AlexaBrasilCSVParser implements Parser {
 	
 	private Reader reader;
 	private Output output;
 	private CSVParser parser;
 	
-	public LinkedInCSVParser() {
+	public AlexaBrasilCSVParser() {
 		
 	}
 	
@@ -46,7 +46,7 @@ public class LinkedInCSVParser implements Parser {
 		if (parser == null) throw new IOException("The parser has not been initialized");
 		
 		Iterator<CSVRecord> iterator = parser.iterator();
-		int numberFields = parser.getHeaderMap().size();
+		Integer numberFields = parser.getHeaderMap().size();
 		
 		while (iterator.hasNext()) {
 			CSVRecord record = iterator.next();
@@ -65,11 +65,10 @@ public class LinkedInCSVParser implements Parser {
 
 	private CSVFormat buildFormat() {
 		return CSVFormat.newFormat(',')
+				.withCommentMarker('#')
 				.withHeader()
 				.withIgnoreEmptyLines()
 				.withIgnoreHeaderCase()
-				.withQuote('"')
 				.withRecordSeparator('\n');
-				
 	}
 }

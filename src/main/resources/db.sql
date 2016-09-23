@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: appdata-mysql.clygu27w06nt.us-west-2.rds.amazonaws.com:3306
--- Generation Time: Aug 04, 2016 at 08:44 PM
--- Server version: 5.7.11
+-- Generation Time: 11-Ago-2016 às 20:06
+-- Versão do servidor: 5.7.11
 -- PHP Version: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alexa_brasil`
+-- Estrutura da tabela `alexa_brasil`
 --
 
 CREATE TABLE `alexa_brasil` (
@@ -40,16 +40,15 @@ CREATE TABLE `alexa_brasil` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `app_store`
+-- Estrutura da tabela `app_store`
 --
 
 CREATE TABLE `app_store` (
-  `url` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `url` varchar(250) COLLATE utf8_bin NOT NULL,
   `name` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `developername` varchar(256) COLLATE utf8_bin DEFAULT NULL,
-  `developerurl` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `developerurl` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL,
-  `isfree` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   `category` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
   `updatedate` date DEFAULT NULL,
   `version` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
@@ -60,13 +59,31 @@ CREATE TABLE `app_store` (
   `ratingallversions` int(20) DEFAULT NULL,
   `developerwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
   `supportwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
-  `description` text COLLATE utf8_bin
+  `import_time` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ebit`
+-- Estrutura da tabela `app_store_developers`
+--
+
+CREATE TABLE `app_store_developers` (
+  `developername` char(250) COLLATE utf8_bin NOT NULL,
+  `developerurl` char(250) COLLATE utf8_bin DEFAULT NULL,
+  `developerwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `supportwebsite` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `languages` varchar(3000) COLLATE utf8_bin DEFAULT NULL,
+  `sum_starsallversions` int(11) DEFAULT NULL,
+  `sum_ratingallversions` int(11) DEFAULT NULL,
+  `qty_apps` int(11) DEFAULT NULL,
+  `processed` tinyint(1) DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `ebit`
 --
 
 CREATE TABLE `ebit` (
@@ -82,7 +99,7 @@ CREATE TABLE `ebit` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ecommerce`
+-- Estrutura da tabela `ecommerce`
 --
 
 CREATE TABLE `ecommerce` (
@@ -100,7 +117,7 @@ CREATE TABLE `ecommerce` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `linkedin`
+-- Estrutura da tabela `linkedin`
 --
 
 CREATE TABLE `linkedin` (
@@ -123,20 +140,19 @@ CREATE TABLE `linkedin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `play_store`
+-- Estrutura da tabela `play_store`
 --
 
 CREATE TABLE `play_store` (
-  `appid` varchar(300) CHARACTER SET utf8 DEFAULT NULL,
+  `appid` varchar(300) COLLATE utf8_bin DEFAULT NULL,
   `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `url` varchar(500) COLLATE utf8_bin DEFAULT NULL,
   `referencedate` date DEFAULT NULL,
-  `developer` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  `istopdeveloper` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `developer` varchar(320) COLLATE utf8_bin DEFAULT NULL,
+  `istopdeveloper` tinyint(1) NOT NULL DEFAULT '0',
   `developerurl` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `developerdomain` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `category` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `isfree` varchar(10) COLLATE utf8_bin DEFAULT NULL,
   `price` decimal(20,2) DEFAULT NULL,
   `score_total` decimal(20,5) DEFAULT NULL,
   `score_count` int(20) DEFAULT NULL,
@@ -146,19 +162,44 @@ CREATE TABLE `play_store` (
   `score_twostars` int(20) DEFAULT NULL,
   `score_onestars` int(20) DEFAULT NULL,
   `instalations` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `currentversion` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `haveinapppurchases` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `haveinapppurchases` tinyint(1) NOT NULL DEFAULT '0',
   `developeremail` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `developerwebsite` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `physicaladdress` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
   `lastupdatedate` date DEFAULT NULL,
-  `description` text COLLATE utf8_bin
+  `import_time` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `whois`
+-- Estrutura da tabela `play_store_developers`
+--
+
+CREATE TABLE `play_store_developers` (
+  `developer` varchar(320) COLLATE utf8_bin NOT NULL,
+  `istopdeveloper` tinyint(1) DEFAULT NULL,
+  `developerurl` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `developerdomain` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `score_total` decimal(20,5) DEFAULT NULL,
+  `score_count` int(20) DEFAULT NULL,
+  `score_fivestars` int(20) DEFAULT NULL,
+  `score_fourstars` int(20) DEFAULT NULL,
+  `score_threestars` int(20) DEFAULT NULL,
+  `score_twostars` int(20) DEFAULT NULL,
+  `score_onestars` int(20) DEFAULT NULL,
+  `instalations` int(20) DEFAULT NULL,
+  `developeremail` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `developerwebsite` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `physicaladdress` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `qty_apps` int(11) NOT NULL DEFAULT '0',
+  `processed` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `whois`
 --
 
 CREATE TABLE `whois` (
@@ -237,7 +278,14 @@ ALTER TABLE `alexa_brasil`
 --
 ALTER TABLE `app_store`
   ADD PRIMARY KEY (`url`),
-  ADD KEY `idx_developername` (`developername`) USING BTREE;
+  ADD KEY `idx_developername` (`developername`) USING BTREE,
+  ADD KEY `idx_developerurl` (`developerurl`) USING BTREE;
+
+--
+-- Indexes for table `app_store_developers`
+--
+ALTER TABLE `app_store_developers`
+  ADD PRIMARY KEY (`developername`);
 
 --
 -- Indexes for table `ebit`
@@ -261,7 +309,13 @@ ALTER TABLE `linkedin`
 -- Indexes for table `play_store`
 --
 ALTER TABLE `play_store`
-  ADD KEY `idx_instalations` (`instalations`) USING BTREE;
+  ADD KEY `idx_developer` (`developer`);
+
+--
+-- Indexes for table `play_store_developers`
+--
+ALTER TABLE `play_store_developers`
+  ADD PRIMARY KEY (`developer`);
 
 --
 -- Indexes for table `whois`

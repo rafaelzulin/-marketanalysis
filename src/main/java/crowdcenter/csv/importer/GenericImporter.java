@@ -35,7 +35,7 @@ public class GenericImporter {
 		logger.info("File encoding: " + System.getProperty("file.encoding"));
 		
 		for (int i = 0; i < arrReaders.length; i++) {
-			logger.trace("Processing File: " + arrFiles[i]);
+			logger.trace("Processing File: #" + (i + 1) + " " + arrFiles[i]);
 			FileReader fileReader = arrReaders[i];
 			
 			Parser parser = ParserFactory.getParser(fileReader, out);
